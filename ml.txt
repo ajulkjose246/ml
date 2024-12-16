@@ -1,0 +1,636 @@
+1)To import csv file, perform data manipulation and analysis using pandas
+    import pandas as pd
+    data = pd.read_csv("house-prices.csv")
+    data = data.dropna()
+    x = data[['SqFt', 'Bedrooms', 'Bathrooms']]
+    y = data['Price']
+    print(x)
+    print(y)
+2)Program to merge two dataframes
+    import pandas as pd
+    df1=pd.read_csv("house-prices.csv")
+    df2=pd.read_csv("duplicatemis.csv")
+    df1=df1.dropna()
+    df2=df2.dropna()
+    merged_data=pd.merge(df1,df2,on='Home',how='outer')
+    print("Merged Dataframes:",merged_data)
+3)Write a program to upload dataset using pandas and perform the following
+1. find the number of rows in the given dataset
+2. find the number of columns in the given dataset
+3. find all the rows having price greater than 1Lakh
+4. Sort the square-feet value in ascending order
+    import pandas as pd
+    data = pd.read_csv("house-prices.csv")
+    data1 = data.dropna()
+    print(f"Number of rows is : {len(data)}")
+    print(f"Number of columns is : {len(data.columns)}")
+    print(f"Price Greater than 100000: \n{data[data['Price']>100000]}")
+    print(f"Sorted SqFt: \n{data.sort_values(by='SqFt', ascending=True)}")
+
+4)To familiars numpy library
+    import numpy as np
+    data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    print("Mean of the dataset:", np.mean(data))
+    print("Standard Deviation of the dataset:", np.std(data))
+    print("Median of the dataset:", np.median(data))
+5)Declare 2 matrix using numpy library and perform various matrix
+operations
+    import numpy as np
+    mat1 = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+    mat2 = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+    print("Sum of two matrix: \n", mat1+mat2)
+    print("Difference of two matrix: \n", mat1-mat2)
+    print("Multiplication of two matrix: \n", np.matmul(mat1,mat2))
+    print("Transpose of a matrix: \n", np.transpose(mat1))
+    print("Negative of a matrix: \n", np.invert(mat1))
+6)Write a program to read marks of students using numpy library. Calculate
+the average mark. Plot a bar graph, using matplotlib and depict the average mark
+obtained by the students
+    import numpy as np
+    import matplotlib.pyplot as plt
+    name = np.array(['Elvin','Eric','Eva','Evania','Evangelin'])
+    mark = np.array([79,88,97,82,93])
+    avg_mark=np.mean(mark)
+    plt.bar(name,mark,color='Green')
+    plt.ylabel('Mark')
+    plt.xlabel('Students')
+    plt.title("Students Mark List")
+    plt.axhline(avg_mark,color='red',linestyle="--")
+    plt.show()
+7)Analyse the given data using histogram
+    import numpy as np
+    import matplotlib.pyplot as plt
+    mark = np.array([23,67,43,68,33,23,99,45,99,55,34])
+    plt.hist(mark,bins=10,color='red',edgecolor='yellow')
+    plt.title("Students Histogram")
+    plt.ylabel("Frequency")
+    plt.xlabel("Marks")
+    plt.show()
+8)Using seaborn and matplotlib library, create a heatmap for the given dataset
+    import seaborn as sns
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    data = {
+    'Students': ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
+    'Math': [85, 78, 92, 88, 76],
+    'Science': [65, 45, 90, 73, 98],
+    'English': [78, 90, 66, 43, 55],
+    'Arts': [55, 87, 66, 90, 43]
+    }
+    df = pd.DataFrame(data)
+    df.set_index('Students', inplace=True)
+    plt.figure(figsize=(10, 6))
+    sns.heatmap(df, annot=True, cmap='coolwarm', linewidths=0.5, linecolor='black')
+    plt.title("Heatmap Representation of marks of students")
+    plt.show()
+9)Using seaborn and matplotlib library, create a scatterplot for the given
+dataset
+import seaborn as sns
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    data = {
+    'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
+    'Age': [25, 30, 35, 40, 45],
+    'Salary': [50000, 60000, 70000, 80000, 90000]
+    }
+    df = pd.DataFrame(data)
+    plt.figure(figsize=(8, 5))
+    sns.scatterplot(x='Age', y='Salary', data=df, color='green',label='Salary')
+    sns.lineplot(x='Age', y='Salary', data=df, color=yellow,label='Trend line')
+    plt.title("Scatter plot of Age vs Salary")
+    plt.xlabel('Age')
+    plt.ylabel('Salary')
+    plt.show()
+10)Select a dataset with at least three numerical variables (e.g., population,
+income, and education level by city). Create a bubble chart that represents the
+data by using bubble sizes and colours to encode information. Additionally, create
+a density chart (e.g., a 2D density plot) to show the concentration of data points.
+Answer the following questions:
+i. How does the bubble chart help in visualizing multivariate data?
+ii. What insights can you gain from the density chart in terms of data
+concentration?
+iii. Are there any interesting patterns or outliers in the data?
+    import pandas as pd
+    import numpy as np
+    import seaborn as sns
+    import matplotlib.pyplot as plt
+    np.random.seed(42)
+    cities = ['City ' + str(i) for i in range(1, 21)]
+    population = np.random.randint(100000, 1000000, size=20)
+    income = np.random.randint(30000, 100000, size=20)
+    education = np.random.randint(50, 100, size=20)
+    data = {
+    'City': cities,
+    'Population': population,
+    'Income': income,
+    'Education': education
+    }
+    df = pd.DataFrame(data)
+    df.head()
+    plt.figure(figsize=(14, 8))
+    scatter = plt.scatter(df['Population'], df['Income'], s=df['Education']*10,
+    c=df['Education'], cmap='viridis', alpha=0.6, edgecolors='w', linewidth=2)
+    plt.colorbar(scatter, label='Education Level')
+    plt.title('Bubble Chart of Population, Income, and Education Level by City')
+    plt.xlabel('Population')
+    plt.ylabel('Income')
+
+    plt.grid(True)
+    plt.show()
+    plt.figure(figsize=(14, 8))
+    sns.kdeplot(x=df['Population'], y=df['Income'], cmap='Blues', shade=True,
+    bw_adjust=0.5)
+    plt.title('Density Chart of Population vs Income')
+    plt.xlabel('Population')
+    plt.ylabel('Income')
+    plt.grid(True)
+    plt.show()
+11)Illustrate the working of k- nearest neighbour algorithm using iris dataset
+    from sklearn.neighbors import KNeighborsClassifier
+    from sklearn.model_selection import train_test_split
+    from sklearn.datasets import load_iris
+    from sklearn.metrics import accuracy_score
+    iris = load_iris()
+    x = iris.data
+    y = iris.target
+    x_train, x_test, y_train, y_test=train_test_split(x, y, test_size=0.2,random_state=42)
+    knn = KNeighborsClassifier(n_neighbors=7)
+    knn.fit(x_train, y_train)
+    V = knn.predict(x_test)
+    print(V)
+    result = accuracy_score(y_test, V)
+    print(result)
+    new_data_point = [[5.1, 3.5, 1.4, 0.2]]
+    prediction = knn.predict(new_data_point)
+    print(iris.target_names)
+    print(prediction)
+    predicted_species = iris.target_names[prediction]
+    print("New data point prediction :", prediction)
+    print("Predicted species for the new data point :", predicted_species)
+12)Illustrate the working of k- nearest neighbour algorithm using wine dataset
+    from sklearn.neighbors import KNeighborsClassifier
+    from sklearn.model_selection import train_test_split
+    from sklearn.datasets import load_wine
+    from sklearn.metrics import accuracy_score
+    wine = load_wine()
+    x = wine.data
+    y = wine.target
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+    knn = KNeighborsClassifier(n_neighbors=7)
+    knn.fit(x_train, y_train)
+    V = knn.predict(x_test)
+    print(V)
+    result = accuracy_score(y_test, V)
+    print(result)
+    new_data_point = [[13.9, 1.69, 2.33, 15.2, 125, 2.6, 3.0, 1.28, 2.39, 6.64, 1.14, 4.92,
+    1063]]
+    prediction = knn.predict(new_data_point)
+    print(wine.target_names)
+    print(prediction)
+    predicted_species = wine.target_names[prediction]
+    print("New data point prediction :", prediction)
+    print("Predicted species for the new data point :", predicted_species)
+13)Upload the given csv file and perform the following operations.
+1. Read and write data files.
+2. Sort the data by age.
+3. Create a subset data where age>30(perform filtration)
+4. Find average salary per department (perform aggregation operations on
+data)
+5. Quantify missing values per column
+6. Fill missing salary with the mean salary(filling)
+7. Drop duplicate values if any
+8. Perform one hot encoding to gender and department
+    import pandas as pd
+    df = pd.read_csv('New_Data.csv')
+    print(df)
+    df_sorted = df.sort_values(by='age')
+    print("\nSorted Data by Age:")
+    print(df_sorted)
+    subset_df = df[df['age'] > 30]
+    print("\nSubset Data where Age > 30:")
+    print(subset_df)
+    aggregated_df=df.groupby('department')['salary'].mean()
+    print("\nMean Salary of each department:")
+    print(aggregated_df)
+    missing_val=df.isnull().sum()
+    print("\nMissing values per column:")
+    print(missing_val)
+    df['salary'].fillna(df['salary'].mean(),inplace=True)
+    print("\nData after filling the missing values:")
+    print(df)
+    df.drop_duplicates(inplace=True)
+    print(df)
+    encoded_df=pd.get_dummies(df,columns=['gender','department'])
+    print("\nEncoded Data:")
+    print(encoded_df)
+14)Illustrate the working of naive bayes algorithm using iris dataset
+    from sklearn.naive_bayes import GaussianNB
+    from sklearn.model_selection import train_test_split
+    from sklearn.datasets import load_iris
+    from sklearn.metrics import accuracy_score
+    iris = load_iris()
+    x = iris.data
+    y = iris.target
+    x_train, x_test, y_train, y_test=train_test_split(x, y, test_size=0.2, random_state=42)
+    gn = GaussianNB()
+    gn.fit(x_train, y_train)
+    V = gn.predict(x_test)
+    print(V)
+    result = accuracy_score(y_test, V)
+    print("Accuracy :",result)
+    new_data_point = [[5.1, 3.5, 1.4, 0.2]]
+    prediction = gn.predict(new_data_point)
+    print(iris.target_names)
+    print(prediction)
+    predicted_species = iris.target_names[prediction]
+    print("New data point prediction :", prediction)
+    print("Predicted species for the new data point :", predicted_species)
+15)Create a CSV file based on the given data and perform the following
+operations.
+1. Drop Missing Values
+2. Filter the rows where the temperature is above 25 degrees.
+3. Sort the data by Humidity in descending order
+4. Group the data by the Date column and calculates the mean of the Temperature,
+Humidity, WindSpeed, and Precipitation columns for each date.
+5. Display the heatmap , showing the correlations between Temperature,
+Humidity, WindSpeed, and Precipitation.
+6. Generate a scatter plot to visualize the relationship between Temperature and
+Humidity in the dataset.
+7. Generate a scatter plot to visualize the relationship between WindSpeed and
+ Precipitation in the dataset.
+8. Generate a histogram to visualize the distribution of Temperature in the dataset.
+9. Generate a histogram to visualize the distribution of Humidity in the dataset.
+10.Create a bubble chart to visualize the relationship between Temperature,
+Humidity, and WindSpeed in the dataset. Use Temperature and Humidity as
+the x and y axes, respectively, and use WindSpeed to determine the size of
+the bubbles.
+11. Create a line chart to visualize the trend of Temperature over time.
+12. Create a bar chart to compare the average Humidity for each date
+    import pandas as pd
+    import seaborn as sns
+    import matplotlib.pyplot as plt
+    df = pd.read_csv('weather_data.csv')
+    df = df.dropna()
+    filtered_df = df[df['Temperature'] > 25]
+    print(filtered_df)
+    sorted_df = df.sort_values(by='Humidity', ascending=False)
+    print(sorted_df)
+    grouped_df = df.groupby('Date').mean()
+    correlation_matrix = df[['Temperature', 'Humidity', 'WindSpeed', 'Precipitation']].corr()
+    print(correlation_matrix)
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', vmin=-1, vmax=1)
+    plt.title('Correlation Heatmap')
+    plt.show()
+    plt.figure(figsize=(8, 6))
+    plt.scatter(df['Temperature'], df['Humidity'], alpha=0.7)
+    plt.title('Temperature vs. Humidity')
+    plt.xlabel('Temperature')
+    plt.ylabel('Humidity')
+    plt.grid(True)
+    plt.show()
+    plt.figure(figsize=(8, 6))
+    plt.scatter(df['WindSpeed'], df['Precipitation'], alpha=0.7)
+    plt.title('WindSpeed vs. Precipitation')
+    plt.xlabel('WindSpeed')
+    plt.ylabel('Precipitation')
+    plt.grid(True)
+    plt.show()
+    plt.figure(figsize=(8, 6))
+    plt.hist(df['Temperature'], bins=10, edgecolor='k', alpha=0.7)
+    plt.title('Distribution of Temperature')
+    plt.xlabel('Temperature')
+    plt.ylabel('Frequency')
+    plt.grid(True)
+    plt.show()
+    plt.figure(figsize=(8, 6))
+    plt.hist(df['Humidity'], bins=10, edgecolor='k', alpha=0.7)
+    plt.title('Distribution of Humidity')
+    plt.xlabel('Humidity')
+    plt.ylabel('Frequency')
+    plt.grid(True)
+    plt.show()
+    plt.figure(figsize=(8, 6))
+    plt.scatter(df['Temperature'], df['Humidity'], s=df['WindSpeed']*10, alpha=0.5,
+    edgecolors='w', linewidth=0.5)
+    plt.title('Bubble Chart of Temperature, Humidity, and WindSpeed')
+    plt.xlabel('Temperature')
+    plt.ylabel('Humidity')
+    plt.show()
+    df['Date'] = pd.to_datetime(df['Date'])
+    plt.figure(figsize=(10, 6))
+    plt.plot(df['Date'], df['Temperature'], marker='o')
+    plt.title('Temperature Trend Over Time')
+    plt.xlabel('Date')
+    plt.ylabel('Temperature')
+    plt.grid(True)
+    plt.xticks(rotation=45)
+    plt.show()
+    average_humidity = df.groupby('Date')['Humidity'].mean()
+    plt.figure(figsize=(10, 6))
+    average_humidity.plot(kind='bar')
+    plt.title('Average Humidity for Each Date')
+    plt.xlabel('Date')
+    plt.ylabel('Average Humidity')
+    plt.grid(True)
+    plt.xticks(rotation=45)
+    plt.show()
+16)Create a CSV file based on the given data and perform the following
+operations.
+1. Drop Missing Values
+2. Filter Rows by Sales
+3. Sort Data by Price
+4. Group Data by Date and Calculate Mean
+5. Display a heatmap showing the correlations between Sales, Price, and Units
+Sold
+6. Generate a scatter plot to visualize the relationship between Sales and Price in
+the dataset
+7. Generate a histogram to visualize the distribution of Sales in the dataset.
+    import pandas as pd
+    import seaborn as sns
+    import matplotlib.pyplot as plt
+    df = pd.read_csv('sales_data.csv')
+    print(df.dtypes)
+    df = df.dropna()
+    filtered_df = df[df['Sales'] > 5000]
+    print(filtered_df)
+    sorted_df = filtered_df.sort_values(by='Price')
+    print(sorted_df)
+    grouped_df = df.groupby('Date')
+    print(grouped_df[['Sales', 'Price', 'Units_Sold']].mean())
+    correlation_matrix = df[['Sales', 'Price', 'Units_Sold']].corr()
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', vmin=-1, vmax=1)
+    plt.title('Correlation Heatmap')
+    plt.show()
+    plt.figure(figsize=(8, 6))
+    plt.scatter(df['Sales'], df['Price'], alpha=0.7)
+    plt.title('Sales vs. Price')
+    plt.xlabel('Sales')
+    plt.ylabel('Price')
+    plt.grid(True)
+    plt.show()
+    plt.figure(figsize=(8, 6))
+    plt.hist(df['Sales'], bins=10, edgecolor='k', alpha=0.7)
+    plt.title('Distribution of Sales')
+    plt.xlabel('Sales')
+    plt.ylabel('Frequency')
+    plt.grid(True)
+    plt.show()
+17)Consider a dataset representing sales data for a retail store, create a CSV
+file and perform the following aggregation operations.
+1. What is the total revenue generated from all sales?
+2. What is the total revenue for each day?
+3. What is the total quantity sold for each product?
+4. What is the average daily revenue?
+5. What is the maximum revenue from a single sale?
+6. What are the statistics (mean, median, min, max) of revenue for each product.
+    import pandas as pd
+    data = pd.read_csv('data.csv')
+    df = pd.DataFrame(data)
+    total_revenue = df['Revenue'].sum()
+    print("Total Revenue:", total_revenue)
+    total_revenue_per_day = df.groupby('Date')['Revenue'].sum()
+    print("\nTotal Revenue per Day:")
+    print(total_revenue_per_day)
+    total_quantity_per_product = df.groupby('Product')['Quantity'].sum()
+    print("\nTotal Quantity per Product:")
+    print(total_quantity_per_product)
+    average_daily_revenue = df.groupby('Date')['Revenue'].sum().mean()
+    print("\nAverage Daily Revenue:", average_daily_revenue)
+    max_revenue_single_sale = df['Revenue'].max()
+    print("\nMaximum Revenue from a Single Sale:", max_revenue_single_sale)
+    statistics_per_product = df.groupby('Product')['Revenue'].agg(['mean', 'median', 'min',
+    'max'])
+    print("\nStatistics per Product:")
+    print(statistics_per_product)
+19)1. Calculate the mean, median, and mode for each numerical column.
+2. Calculate the variance and standard deviation for each numerical column.
+3. Create a correlation matrix and visualize it using a heatmap.
+4. Calculate skewness and kurtosis for each numerical column.
+5. Determine the 25th, 50th (median), and 75th percentiles (quantiles) for each
+numerical column.
+    import pandas as pd
+    import seaborn as sns
+    import matplotlib.pyplot as plt
+    from scipy.stats import skew, kurtosis
+    df = pd.read_csv('employee_data.csv')
+    mean_values = df.mean()
+    median_values = df.median()
+    mode_values = df.mode().iloc[0]
+    print("Mean Values:")
+    print(mean_values)
+    print("\nMedian Values:")
+    print(median_values)
+    print("\nMode Values:")
+    print(mode_values)
+    variance_values = df.var()
+    std_dev_values = df.std()
+    print("\nVariance Values:")
+    print(variance_values)
+    print("\nStandard Deviation Values:")
+    print(std_dev_values)
+    correlation_matrix = df.corr()
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
+    plt.title('Correlation Matrix Heatmap')
+    plt.show()
+    skewness_values = df.skew()
+    kurtosis_values = df.kurt()
+    print("\nSkewness Values:")
+    print(skewness_values)
+    print("\nKurtosis Values:")
+    print(kurtosis_values)
+    quantiles = df.quantile([0.25, 0.5, 0.75])
+    print("\nQuantiles:")
+    print(quantiles)
+20)Covariance and Pairplot Visualization(use the same previous data)
+1. Calculate the covariance matrix for the numerical columns in the dataset.
+2. Interpret the covariance values in terms of the relationship between variables.
+3. Visualize pairwise relationships between the variables using a pairplot.
+4. Covariance measures the degree to which two variables change together.
+Positive covariance indicates a direct relationship, while negative indicates an
+inverse relationship.
+5. Pairplot is a powerful visualization tool to understand the relationships between
+multiple pairs of variables simultaneously
+    import pandas as pd
+    import seaborn as sns
+    import matplotlib.pyplot as plt
+    df = pd.read_csv('employee_data.csv')
+    covariance_matrix = df.cov()
+    print("Covariance Matrix:")
+    print(covariance_matrix)
+    sns.pairplot(df)
+    plt.title('Pairplot of Employee Data')
+    print("\nCovariance Interpretation:")
+    print("1. Covariance between 'Age' and 'Salary':", covariance_matrix.loc['Age', 'Salary'])
+    print(" Interpretation: Positive covariance indicates that as employees age, their salaries
+    tend to increase.")
+    print("2. Covariance between 'Age' and 'Experience':", covariance_matrix.loc['Age',
+    'Experience(Years)'])
+    print(" Interpretation: Positive covariance suggests that as employees get older, their
+    experience also tends to increase.")
+    print("3. Covariance between 'Salary' and 'Experience':", covariance_matrix.loc['Salary',
+    'Experience(Years)'])
+    print(" Interpretation: Positive covariance indicates that employees with more
+    experience tend to have higher salaries.")
+    plt.show()
+
+21)1. Calculate the mean, median, and mode for each numerical column
+(Sales_Amount,Quantity_Sold, Discount (%)).
+2. Calculate the variance and standard deviation for each numerical column.
+3. Create a correlation matrix for the numerical columns and visualize it using a
+heatmap.
+4. Calculate skewness and kurtosis for each numerical column.
+5. Determine the 25th, 50th (median), and 75th percentiles (quantiles) for each
+numerical column.
+6. Calculate the covariance matrix for the numerical columns in the dataset.
+7. Interpret the covariance values in terms of the relationship between variables.
+8. Visualize pairwise relationships between the variables using a pairplot.
+    import pandas as pd
+    import seaborn as sns
+    import matplotlib.pyplot as plt
+    from scipy.stats import skew, kurtosis
+    df = pd.read_csv('product_data.csv')
+    df['Sales_Amount'] = pd.to_numeric(df['Sales_Amount'], errors='coerce')
+    df['Quantity_Sold'] = pd.to_numeric(df['Quantity_Sold'], errors='coerce')
+    df['Discount(%)'] = pd.to_numeric(df['Discount(%)'], errors='coerce')
+    mean_values = df[['Sales_Amount', 'Quantity_Sold', 'Discount(%)']].mean()
+    median_values = df[['Sales_Amount', 'Quantity_Sold', 'Discount(%)']].median()
+    mode_values = df[['Sales_Amount', 'Quantity_Sold', 'Discount(%)']].mode().iloc[0]
+    print("Mean Values:")
+    print(mean_values)
+    print("\nMedian Values:")
+    print(median_values)
+    print("\nMode Values:")
+    print(mode_values)
+    variance_values = df[['Sales_Amount', 'Quantity_Sold', 'Discount(%)']].var()
+    std_dev_values = df[['Sales_Amount', 'Quantity_Sold', 'Discount(%)']].std()
+    print("\nVariance Values:")
+    print(variance_values)
+    print("\nStandard Deviation Values:")
+    print(std_dev_values)
+    correlation_matrix = df[['Sales_Amount', 'Quantity_Sold', 'Discount(%)']].corr()
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
+    plt.title('Correlation Matrix Heatmap')
+    plt.show()
+    skewness_values = df[['Sales_Amount', 'Quantity_Sold', 'Discount(%)']].skew()
+    kurtosis_values = df[['Sales_Amount', 'Quantity_Sold', 'Discount(%)']].kurt()
+    print("\nSkewness Values:")
+    print(skewness_values)
+    print("\nKurtosis Values:")
+    print(kurtosis_values)
+    quantiles = df[['Sales_Amount', 'Quantity_Sold', 'Discount(%)']].quantile([0.25, 0.5,
+    0.75])
+    print("\nQuantiles:")
+    print(quantiles)
+    covariance_matrix = df[['Sales_Amount', 'Quantity_Sold', 'Discount(%)']].cov()
+    print("\nCovariance Matrix:")
+    print(covariance_matrix)
+    print("\nCovariance Interpretation:")
+    print("1. Covariance between 'Sales_Amount' and 'Quantity_Sold':",
+    covariance_matrix.loc['Sales_Amount', 'Quantity_Sold'])
+    print(" Interpretation: Positive covariance indicates that as sales amount increases,
+    quantity sold tends to increase.")
+    print("2. Covariance between 'Sales_Amount' and 'Discount(%)':",
+    covariance_matrix.loc['Sales_Amount', 'Discount(%)'])
+    print(" Interpretation: Positive covariance suggests that as sales amount increases, the
+    discount percentage also tends to increase.")
+    print("3. Covariance between 'Quantity_Sold' and 'Discount(%)':",
+    covariance_matrix.loc['Quantity_Sold', 'Discount(%)'])
+    print(" Interpretation: Positive covariance indicates that as quantity sold increases, the
+    discount percentage tends to increase.")
+    sns.pairplot(df[['Sales_Amount', 'Quantity_Sold', 'Discount(%)']])
+    plt.suptitle('Pairplot of Product Data', y=1.02)
+    plt.show()
+22)Program to implement decision tree using standard dataset iris available in
+scikit learn and find the accuracy of the algorithm also construct a decision tree
+with maximum depth=5
+    from sklearn.tree import DecisionTreeClassifier
+    from sklearn.model_selection import train_test_split
+    from sklearn.datasets import load_iris
+    from sklearn.metrics import accuracy_score
+    from sklearn.tree import plot_tree
+    import matplotlib.pyplot as plt
+    iris = load_iris()
+    x = iris.data
+    y = iris.target
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+    clf = DecisionTreeClassifier(max_depth=5)
+    clf.fit(x_train, y_train)
+    plt.figure(figsize=(15,20))
+    plot_tree(clf,filled=True,feature_names=iris.feature_names,class_names=iris.target_na
+    mes,rounded=True)
+    plt.title("Decision Tree")
+    plt.show()
+    V = clf.predict(x_test)
+    print(V)
+    result = accuracy_score(y_test, V)
+    print(result)
+23)Load the iris dataset and implement decision tree algorithm. Import the
+metrics accurracy_score, classification_report, confusion_matrix from
+sklearn.metrics and evaluate the performance of the model
+    from sklearn.tree import DecisionTreeClassifier
+    from sklearn.model_selection import train_test_split
+    from sklearn.datasets import load_iris
+    from sklearn.metrics import accuracy_score,classification_report,confusion_matrix
+    from sklearn.tree import plot_tree
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    iris = load_iris()
+    x = iris.data
+    y = iris.target
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+    clf = DecisionTreeClassifier(max_depth=10)
+    clf.fit(x_train, y_train)
+    V = clf.predict(x_test)
+    result = accuracy_score(y_test, V)
+    report=classification_report(y_test,V,target_names=iris.target_names)
+    print("Accurracy:",result)
+    print("Classification Report :",report," \n")
+    conf_matrix=confusion_matrix(y_test, V)
+    print("Confusion Matrix:\n ",conf_matrix)
+    plt.figure(figsize=(6,6))
+    # sns.heatmap(conf_matrix,annot=True,fmt="d",cmap="Blues",xticklabels=["Predicted
+    0","Predicted 1","Predcited 2"],yticklabels=["Actual 0","Actual 1","Actual 2"])
+    sns.heatmap(conf_matrix,annot=True,fmt="d",cmap="Greens",xticklabels=iris.target_n
+    ames,yticklabels=iris.target_names)
+    plt.xlabel("Predicted")
+    plt.ylabel("Actual")
+    plt.title("Confusion Matrix")
+    plt.show()
+24)Given a one dimensional dataset represented with numpy array. Write a
+program to calculate the slope and intercept
+    import numpy as np
+    from sklearn.linear_model import LinearRegression
+    from sklearn.metrics import mean_squared_error
+    x_values=np.array([20,30,40,50]).reshape(-1,1)
+    y_values=np.array([58,54,50,46])
+    model=LinearRegression()
+    model.fit(x_values,y_values)
+    slope=model.coef_[0]
+    intercept=model.intercept_
+    print("Linear Regression ")
+    print("Slope: ",slope)
+    print("Intercept",intercept)
+    print("y = ", intercept, " + ", slope,"x")
+    y_pred=model.predict(x_values)
+    mse=mean_squared_error(y_values,y_pred)
+    print("Mean Squared Error :",mse)
+25)Program to implement multiple linear regression with dataset in a public
+    domain(house-price.csv)
+    import pandas as pd
+    from sklearn.linear_model import LinearRegression
+    from sklearn.model_selection import train_test_split
+    from sklearn.metrics import mean_squared_error
+    df=pd.read_csv('house-prices.csv')
+    print(df.head())
+    x=df[['SqFt','Bedrooms','Bathrooms']]
+    y=df['Price']
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+    model=LinearRegression()
+    model.fit(x_train,y_train)
+    y_pred=model.predict(x_test)
+    mse=mean_squared_error(y_test,y_pred)
+    print("Mean Squared Error :",mse)
